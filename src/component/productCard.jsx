@@ -96,128 +96,131 @@ const ProductCard = () => {
 
   
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-xl font-bold mb-4 text-center">Add Food Item</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Name */}
+    <div className="max-w-4xl mx-auto  bg-white rounded-lg ">
+    <h2 className="text-xl font-bold mb-4 text-center">Add Food Item</h2>
+    <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
+      {/* Name */}
+      <input
+        type="text"
+        name="name"
+        value={formData.name}
+        onChange={handleChange}
+        placeholder="Food Name"
+        className="p-2 border rounded col-span-1"
+        required
+      />
+  
+      {/* Price */}
+      <input
+        type="number"
+        name="price"
+        value={formData.price}
+        onChange={handleChange}
+        placeholder="Price (₹)"
+        className="p-2 border rounded col-span-1"
+        required
+      />
+  
+      {/* Description */}
+      <textarea
+        name="description"
+        value={formData.description}
+        onChange={handleChange}
+        placeholder="Description"
+        className="p-2 border rounded col-span-2"
+        required
+      />
+  
+      {/* Category */}
+      <select
+        name="category"
+        value={formData.category}
+        onChange={handleChange}
+        className="p-2 border rounded col-span-1"
+        required
+      >
+        <option value="">Select Category</option>
+        {categories.map((cat) => (
+          <option key={cat} value={cat}>
+            {cat}
+          </option>
+        ))}
+      </select>
+  
+      {/* Food Type */}
+      <select
+        name="foodType"
+        value={formData.foodType}
+        onChange={handleChange}
+        className="p-2 border rounded col-span-1"
+        required
+      >
+        <option value="">Select Food Type</option>
+        {foodTypes.map((type) => (
+          <option key={type} value={type}>
+            {type}
+          </option>
+        ))}
+      </select>
+  
+      {/* Preparation Time */}
+      <input
+        type="number"
+        name="preparationTime"
+        value={formData.preparationTime}
+        onChange={handleChange}
+        placeholder="Preparation Time (minutes)"
+        className="p-2 border rounded col-span-1"
+        required
+      />
+  
+      {/* Availability */}
+      <div className="flex items-center space-x-2 col-span-1">
         <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          placeholder="Food Name"
-          className="w-full p-2 border rounded"
-          required
+          type="checkbox"
+          checked={formData.availability}
+          onChange={handleAvailabilityChange}
+          className="h-5 w-5"
         />
-
-        {/* Description */}
-        <textarea
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-          placeholder="Description"
-          className="w-full p-2 border rounded"
-          required
-        />
-
-        {/* Price */}
-        <input
-          type="number"
-          name="price"
-          value={formData.price}
-          onChange={handleChange}
-          placeholder="Price (₹)"
-          className="w-full p-2 border rounded"
-          required
-        />
-
-        {/* Category */}
-        <select
-          name="category"
-          value={formData.category}
-          onChange={handleChange}
-          className="w-full p-2 border rounded"
-          required
-        >
-          <option value="">Select Category</option>
-          {categories.map((cat) => (
-            <option key={cat} value={cat}>
-              {cat}
-            </option>
-          ))}
-        </select>
-
-        {/* Food Type */}
-        <select
-          name="foodType"
-          value={formData.foodType}
-          onChange={handleChange}
-          className="w-full p-2 border rounded"
-          required
-        >
-          <option value="">Select Food Type</option>
-          {foodTypes.map((type) => (
-            <option key={type} value={type}>
-              {type}
-            </option>
-          ))}
-        </select>
-
-        {/* Preparation Time */}
-        <input
-          type="number"
-          name="preparationTime"
-          value={formData.preparationTime}
-          onChange={handleChange}
-          placeholder="Preparation Time (minutes)"
-          className="w-full p-2 border rounded"
-          required
-        />
-
-        {/* Availability */}
-        <div className="flex items-center space-x-2">
+        <label>Available</label>
+      </div>
+  
+      {/* Ingredients */}
+      <div className="border p-3 rounded col-span-2">
+        <label className="block mb-2">Ingredients</label>
+        <div className="flex space-x-2">
           <input
-            type="checkbox"
-            checked={formData.availability}
-            onChange={handleAvailabilityChange}
-            className="h-5 w-5"
+            type="text"
+            value={ingredientInput}
+            onChange={(e) => setIngredientInput(e.target.value)}
+            placeholder="Enter ingredient"
+            className="flex-1 p-2 border rounded"
           />
-          <label>Available</label>
+          <button type="button" onClick={handleIngredientAdd} className="px-3 bg-green-500 text-white rounded">
+            Add
+          </button>
         </div>
-
-        {/* Ingredients */}
-        <div className="border p-3 rounded">
-          <label className="block mb-2">Ingredients</label>
-          <div className="flex space-x-2">
-            <input
-              type="text"
-              value={ingredientInput}
-              onChange={(e) => setIngredientInput(e.target.value)}
-              placeholder="Enter ingredient"
-              className="flex-1 p-2 border rounded"
-            />
-            <button type="button" onClick={handleIngredientAdd} className="px-3 bg-green-500 text-white rounded">
-              Add
-            </button>
-          </div>
-          <ul className="mt-2">
-            {formData.ingredients.map((ing, index) => (
-              <li key={index} className="text-sm text-gray-700">
-                • {ing}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Image Upload */}
+        <ul className="mt-2 grid grid-cols-2 gap-1">
+          {formData.ingredients.map((ing, index) => (
+            <li key={index} className="text-sm text-gray-700">
+              • {ing}
+            </li>
+          ))}
+        </ul>
+      </div>
+  
+      {/* Image Upload */}
+      <div className="col-span-2">
         <input type="file" onChange={handleFileChange} accept="image/*" className="w-full p-2 border rounded" required />
-
-        {/* Submit Button */}
-        <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
-          Add Food Item
-        </button>
-      </form>
-    </div>
+      </div>
+  
+      {/* Submit Button */}
+      <button type="submit" className="col-span-2 bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
+        Add Food Item
+      </button>
+    </form>
+  </div>
+  
   );
 };
 

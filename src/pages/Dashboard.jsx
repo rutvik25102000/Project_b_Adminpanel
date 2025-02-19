@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate, Route, Routes } from "react-router-dom";
-import ProductCard from "../component/productCard"; // Import the ProductCard component
-import ProductDeatails from "../component/ProductTable"; 
+import ProductCard from "../component/productCard"; 
+import ProductDetails from "../component/ProductTable"; 
+
 const Dashboard = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
@@ -18,14 +19,14 @@ const Dashboard = () => {
   }, [navigate]);
 
   return (
-    <div>
-      <h1 className="text-xl font-bold text-center my-4">Dashboard</h1>
-      <Routes>
-        <Route path="add-product" element={<ProductCard />} />
-        <Route path="/" element={<ProductCard />} />
-        <Route path="/product-details" element={<ProductDeatails />} />
-
-      </Routes>
+    <div className="h-full flex flex-col">
+      <div className="flex-1 bg-white shadow-md rounded-lg p-4">
+        <Routes>
+          <Route path="add-product" element={<ProductCard />} />
+          <Route path="/" element={<ProductCard />} />
+          <Route path="/product-details" element={<ProductDetails />} />
+        </Routes>
+      </div>
     </div>
   );
 };

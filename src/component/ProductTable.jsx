@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+
 import { getAllFoodItems } from "../APIs/AllApis"; // Import API function
 
 
@@ -8,8 +8,20 @@ const ProductTable = () => {
 
     useEffect(() => {
         getAllFoodItems()
-            .then((response) => setProducts(response.data))
-            .catch((error) => console.error("Error fetching products:", error));
+            // .then((response) => setProducts(response.data))
+            // .catch((error) => console.error("Error fetching products:", error));
+            .then((data) => {
+                if (Array.isArray(data)) {
+                    setProducts(data);
+                } else {
+                    console.error("Unexpected API response:", data);
+                    setProducts([]); // Fallback to an empty array
+                }
+            })
+            .catch((error) => {
+                console.error("Error fetching products:", error);
+                setProducts([]); // Ensure state is always an array
+            });
     }, []);
 
     const handleEdit = (productId) => {
@@ -34,6 +46,7 @@ const ProductTable = () => {
                         </tr>
                     </thead>
                     <tbody>
+                        {/* {Array.isArray(products) && products.map((product, index) => ( */}
                         {products.map((product, index) => (
                             <tr key={product._id} className="border-b">
                                 <td className="py-2 px-4">{index + 1}</td>

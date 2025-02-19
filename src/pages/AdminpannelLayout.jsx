@@ -19,7 +19,7 @@ function AdminLayout() {
         {/* Sidebar (Full Height) */}
         <div
           className={`fixed top-16 left-0  bg-white shadow-md transition-all duration-300 ${
-            isSidebarOpen ? "w-64" : "w-16"
+            isSidebarOpen ? "w-64" : "w-0"
           }`}
         >
           <Sidebar isOpen={isSidebarOpen} />
@@ -27,8 +27,8 @@ function AdminLayout() {
 
         {/* Main Content Area */}
         <div
-          className={`flex-1 overflow-auto transition-all duration-300 ${
-            isSidebarOpen ? "ml-64" : "ml-16"
+          className={`flex-1 overflow-auto transition-all  duration-300 ${
+            isSidebarOpen ? "ml-64" : "ml-0"
           } p-6`}
         >
           <main className="bg-white h-full shadow-md rounded-lg ">
