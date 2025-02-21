@@ -10,7 +10,7 @@ function AdminLayout() {
     return (
       <div className="h-screen flex flex-col bg-gray-100">
         {/* Sticky Navbar */}
-        <div className="fixed top-0 w-full z-50 bg-white shadow-md">
+        <div className="fixed top-0 w-full z-50 bg-white ">
           <Navbar toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
         </div>
   
@@ -31,7 +31,7 @@ function AdminLayout() {
             isSidebarOpen ? "ml-64" : "ml-0"
           } p-6`}
         >
-          <main className="bg-white h-full shadow-md rounded-lg ">
+          <main >
             <Routes>
               <Route path="/*" element={<Dashboard />} />
               {/* Add more admin routes here */}

@@ -25,6 +25,11 @@ const Sidebar = ({ isOpen }) => {
           className="block py-2 px-4 m-2 border-solid rounded-sm bg-gray-300  hover:bg-gray-500 hover:text-white"
         >
           product-Table
+        </Link><Link
+          to="/admin/categories-page"
+          className="block py-2 px-4 m-2 border-solid rounded-sm bg-gray-300  hover:bg-gray-500 hover:text-white"
+        >
+          categories-page
         </Link>
       </nav>
     </aside>

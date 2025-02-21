@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate, Route, Routes } from "react-router-dom";
 import ProductCard from "../component/productCard"; 
 import ProductDetails from "../component/ProductTable"; 
+import CategoriesPage from "../pages/CategoriesPage";
+
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -16,15 +18,16 @@ const Dashboard = () => {
     } else {
       setUser(JSON.parse(userData));
     }
-  }, [navigate]);
+  }, []);
 
   return (
     <div className="h-full flex flex-col">
-      <div className="flex-1 bg-white shadow-md rounded-lg p-4">
+      <div className="flex-1 p-4">
         <Routes>
           <Route path="add-product" element={<ProductCard />} />
           <Route path="/" element={<ProductCard />} />
           <Route path="/product-details" element={<ProductDetails />} />
+          <Route path="/categories-page" element={<CategoriesPage />} />
         </Routes>
       </div>
     </div>
