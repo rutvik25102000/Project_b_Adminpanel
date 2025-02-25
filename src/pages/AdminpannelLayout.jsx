@@ -34,7 +34,7 @@ function AdminLayout() {
           <main >
             <Routes>
               <Route path="/*" element={<Dashboard />} />
-              {/* Add more admin routes here */}
+             
             </Routes>
           </main>
         </div>

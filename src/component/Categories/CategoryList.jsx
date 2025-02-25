@@ -1,34 +1,33 @@
-import { useState, useEffect } from "react";
-import { getCategories, deleteCategory } from "../APIs/categoryApi";
+import {  useEffect } from "react";
+import { getCategories,deleteCategory } from "../../APIs/categoryApi";
 
-const CategoryList = ({ onEdit }) => {
-  const [categories, setCategories] = useState([]); // Ensure it's always an array
+const CategoryList = ({ categories, setCategories, onEdit  }) => {
 
+  // ✅ Fetch Categories from Backend
   const fetchCategories = async () => {
     try {
-      const data = await getCategories();
-      console.log("Fetched Categories:", data); // Debugging
-  
-      if (data.success) {
-        setCategories(Array.isArray(data.categories) ? data.categories : []);
+      const response = await getCategories();
+      if (response?.data?.categories) {
+        setCategories(response.data.categories);
       } else {
-        setCategories([]); // Ensure state is always an array
+        setCategories([]); 
       }
     } catch (error) {
       console.error("Error fetching categories:", error);
-      setCategories([]);
     }
   };
+
   useEffect(() => {
     fetchCategories();
   }, []);
+
 
 
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure?")) return;
     try {
       await deleteCategory(id);
-      setCategories((prev) => prev.filter((category) => category._id !== id));
+      setCategories((prev) => prev.filter((category) => category._id !== id)); // ✅ Remove category from state
     } catch (error) {
       console.error("Error deleting category:", error);
     }
@@ -37,6 +36,8 @@ const CategoryList = ({ onEdit }) => {
   return (
     <div className="bg-white shadow-md rounded-lg p-4 mt-4">
       <h2 className="text-lg font-bold mb-2">Category List</h2>
+      
+    
       {categories.length === 0 ? (
         <p>No categories found.</p>
       ) : (

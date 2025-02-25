@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { getCategories } from "../APIs/categoryApi";
+import { getCategories } from "../../APIs/categoryApi";
 
 
 const ProductCard = () => {
@@ -24,21 +24,18 @@ const ProductCard = () => {
 
 
     useEffect(() => {
-       const fetchCategories = async () => {
-           try {
-             const data = await getCategories();
-             console.log("Fetched Categories:", data); // Debugging
-         
-             if (data.success) {
-               setCategories(Array.isArray(data.categories) ? data.categories : []);
-             } else {
-               setCategories([]); // Ensure state is always an array
-             }
-           } catch (error) {
-             console.error("Error fetching categories:", error);
-             setCategories([]);
-           }
-         };
+        const fetchCategories = async () => {
+            try {
+              const response = await getCategories();
+              if (response?.data?.categories) {
+                setCategories(response.data.categories); // ✅ Correctly set categories
+              } else {
+                setCategories([]); // Fallback to empty array
+              }
+            } catch (error) {
+              console.error("Error fetching categories:", error);
+            }
+          };
 
         fetchCategories();
     }, []);

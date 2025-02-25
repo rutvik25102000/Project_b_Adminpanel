@@ -4,14 +4,8 @@ const API_URL = "http://localhost:5000/api/categories";
 
 // Fetch all categories
 export const getCategories = async () => {
-    try {
-      const response = await axios.get(`${API_URL}/getcategories`);
-      return response.data; // Return actual data
-    } catch (error) {
-      console.error("Error fetching categories:", error);
-      return { success: false, categories: [] }; // Handle error gracefully
-    }
-  };
+  return axios.get(`${API_URL}/getcategories`);
+};
 // Add a new category
 export const addCategory = async (categoryData) => {
   return axios.post(`${API_URL}/create`, categoryData);
@@ -24,5 +18,5 @@ export const updateCategory = async (id, categoryData) => {
 
 // Delete a category
 export const deleteCategory = async (id) => {
-  return axios.delete(`${API_URL}/${id}`);
+  return axios.delete(`${API_URL}/deletecategory/${id}`);
 };

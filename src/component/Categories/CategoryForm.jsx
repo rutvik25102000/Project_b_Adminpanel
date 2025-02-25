@@ -1,19 +1,18 @@
 import { useState, useEffect } from "react";
 
 const CategoryForm = ({ onSubmit, initialData = {} }) => {
-  // Ensure initialData is always an object
-  const safeInitialData = initialData || {}; 
-  const [name, setName] = useState(safeInitialData.name || "");
+  const [name, setName] = useState(initialData?.name || "");
 
   useEffect(() => {
-    setName(safeInitialData.name || "");
-  }, [safeInitialData]); // Update state when initialData changes
+    setName(initialData?.name || "");
+  }, [initialData?.name]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!name.trim()) return;
-    onSubmit({ name });
-    setName("");
+
+    onSubmit(initialData?._id ? { _id: initialData._id, name } : { name });
+    setName(""); 
   };
 
   return (
@@ -26,7 +25,7 @@ const CategoryForm = ({ onSubmit, initialData = {} }) => {
         className="border p-2 rounded w-full"
       />
       <button type="submit" className="bg-cyan-500 text-white px-4 py-2 rounded">
-        {safeInitialData.name ? "Update" : "Add"}
+        {initialData?.name ? "Update" : "Add"}
       </button>
     </form>
   );

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import AdminLogin from "../component/AdminLogin";
-import AdminRegistration from "../component/AdminRegistration";
+import AdminLogin from "../component/login/AdminLogin";
+import AdminRegistration from "../component/login/AdminRegistration";
 
 const AdminAuthPage = () => {
   const [isLogin, setIsLogin] = useState(true); // State to toggle between login and registration forms

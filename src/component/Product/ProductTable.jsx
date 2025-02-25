@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from "react";
-
-import { getAllFoodItems } from "../APIs/AllApis"; // Import API function
-
-
+import { useNavigate, useLocation } from "react-router-dom";
+import { getAllFoodItems, deleteProduct } from "../../APIs/AllApis"; // Import API function
 const ProductTable = () => {
     const [products, setProducts] = useState([]);
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    useEffect(() => {
+        if (location.state?.updated) {
+            getAllFoodItems().then(setProducts);
+        }
+    }, [location]);
+
 
     useEffect(() => {
         getAllFoodItems()
-            // .then((response) => setProducts(response.data))
-            // .catch((error) => console.error("Error fetching products:", error));
+
             .then((data) => {
                 if (Array.isArray(data)) {
                     setProducts(data);
@@ -25,8 +31,20 @@ const ProductTable = () => {
     }, []);
 
     const handleEdit = (productId) => {
-        console.log("Edit product:", productId);
-        // Navigate to edit form or open a modal
+        navigate(`/admin/product-update/${productId}`);
+    };
+
+    const handleDelete = async (id) => {
+        if (!window.confirm("Are you sure?")) return;
+       
+   
+       
+        try {
+            await deleteProduct(id);
+            setProducts((prev) => prev.filter((product) => product._id !== id)); // ✅ Remove product from state
+        } catch (error) {
+            console.error("Error deleting product:", error);
+        }
     };
 
     return (
@@ -72,10 +90,16 @@ const ProductTable = () => {
                                 </td>
                                 <td className="py-2 px-4">
                                     <button
-                                        className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
+                                        className="bg-blue-500 text-white px-3 py-1 m-1 rounded hover:bg-blue-600"
                                         onClick={() => handleEdit(product._id)}
                                     >
                                         Edit
+                                    </button>
+                                    <button
+                                        onClick={() => handleDelete(product._id)}
+                                        className="bg-red-500 text-white px-2 py-1 rounded"
+                                    >
+                                        Delete
                                     </button>
                                 </td>
                             </tr>
