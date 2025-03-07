@@ -124,111 +124,154 @@ const UpdateformData = () => {
   };
 
   return (
-    <div className="p-6 max-w-lg mx-auto bg-white rounded shadow">
-      <h2 className="text-2xl font-bold mb-4">Update Food Item</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          placeholder="Food Name"
-          required
-          className="w-full p-2 border rounded"
-        />
-        <textarea
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-          placeholder="Description"
-          required
-          className="w-full p-2 border rounded"
-        ></textarea>
-        <input
-          type="number"
-          name="price"
-          value={formData.price}
-          onChange={handleChange}
-          placeholder="Price"
-          required
-          className="w-full p-2 border rounded"
-        />
-        <select
-          name="category"
-          value={formData.category}
-          onChange={handleChange}
-          required
-          className="w-full p-2 border rounded"
-        >
-          <option value="">Select Category</option>
-          {categories.length > 0 ? (
-            categories.map((cat) => (
-              <option key={cat._id} value={cat._id}>
-                {cat.name}
-              </option>
-            ))
-          ) : (
-            <option disabled>Loading categories...</option>
-          )}
-        </select>
+    <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-8">
+      <h2 className="text-3xl font-semibold text-center text-gray-800 mb-6">Update Food Item</h2>
+      <form onSubmit={handleSubmit} className="space-y-5">
+        {/* Food Name */}
+        <div>
+          <label className="block text-gray-700 font-medium mb-1">Food Name</label>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            placeholder="Enter food name"
+            required
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
 
-        {/* Image Preview */}
-        <img
-          src={imagePreview || "/default-image.jpg"}
-          alt="Food Preview"
-          className="w-24 h-24 object-cover rounded"
-        />
+        {/* Description */}
+        <div>
+          <label className="block text-gray-700 font-medium mb-1">Description</label>
+          <textarea
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+            placeholder="Enter food description"
+            required
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          ></textarea>
+        </div>
 
-        <input
-          type="file"
-          name="imageUrl"
-          accept="image/*"
-          onChange={handleFileChange}
-          className="w-full p-2 border rounded"
-        />
+        {/* Price */}
+        <div>
+          <label className="block text-gray-700 font-medium mb-1">Price</label>
+          <input
+            type="number"
+            name="price"
+            value={formData.price}
+            onChange={handleChange}
+            placeholder="Enter price"
+            required
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
 
-        <input
-          type="text"
-          name="ingredients"
-          value={formData.ingredients}
-          onChange={handleChange}
-          placeholder="Ingredients (comma separated)"
-          className="w-full p-2 border rounded"
-        />
-        <label className="flex items-center space-x-2">
+        {/* Category */}
+        <div>
+          <label className="block text-gray-700 font-medium mb-1">Category</label>
+          <select
+            name="category"
+            value={formData.category}
+            onChange={handleChange}
+            required
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="">Select Category</option>
+            {categories.length > 0 ? (
+              categories.map((cat) => (
+                <option key={cat._id} value={cat._id}>
+                  {cat.name}
+                </option>
+              ))
+            ) : (
+              <option disabled>Loading categories...</option>
+            )}
+          </select>
+        </div>
+
+        {/* Image Upload & Preview */}
+        <div className="flex flex-col items-center space-y-3">
+          <img
+            src={imagePreview || "/default-image.jpg"}
+            alt="Food Preview"
+            className="w-32 h-32 object-cover rounded-lg border"
+          />
+          <input
+            type="file"
+            name="imageUrl"
+            accept="image/*"
+            onChange={handleFileChange}
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        {/* Ingredients */}
+        <div>
+          <label className="block text-gray-700 font-medium mb-1">Ingredients</label>
+          <input
+            type="text"
+            name="ingredients"
+            value={formData.ingredients}
+            onChange={handleChange}
+            placeholder="Ingredients (comma separated)"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        {/* Availability Checkbox */}
+        <div className="flex items-center space-x-2">
           <input
             type="checkbox"
             name="availability"
             checked={formData.availability}
             onChange={handleChange}
+            className="w-5 h-5 text-blue-500"
           />
-          <span>Available</span>
-        </label>
-        <input
-          type="number"
-          name="preparationTime"
-          value={formData.preparationTime}
-          onChange={handleChange}
-          placeholder="Preparation Time (mins)"
-          required
-          className="w-full p-2 border rounded"
-        />
-        <select
-          name="foodType"
-          value={formData.foodType}
-          onChange={handleChange}
-          required
-          className="w-full p-2 border rounded"
+          <label className="text-gray-700 font-medium">Available</label>
+        </div>
+
+        {/* Preparation Time */}
+        <div>
+          <label className="block text-gray-700 font-medium mb-1">Preparation Time (mins)</label>
+          <input
+            type="number"
+            name="preparationTime"
+            value={formData.preparationTime}
+            onChange={handleChange}
+            placeholder="Enter preparation time"
+            required
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        {/* Food Type */}
+        <div>
+          <label className="block text-gray-700 font-medium mb-1">Food Type</label>
+          <select
+            name="foodType"
+            value={formData.foodType}
+            onChange={handleChange}
+            required
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="Veg">Veg</option>
+            <option value="Non-Veg">Non-Veg</option>
+          </select>
+        </div>
+
+        {/* Submit Button */}
+        <button
+          type="submit"
+          className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
         >
-          <option value="Veg">Veg</option>
-          <option value="Non-Veg">Non-Veg</option>
-        </select>
-        <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded">
           Update Food Item
         </button>
       </form>
     </div>
   );
 };
+
 
 export default UpdateformData;

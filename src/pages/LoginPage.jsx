@@ -10,7 +10,7 @@ const AdminAuthPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center min-h-screen bg-gray-900">
       <div className="bg-white shadow-lg p-8 rounded-lg w-full max-w-md">
         <h2 className="text-3xl font-semibold text-center text-gray-700 mb-6">
           {isLogin ? "Admin Login" : "Admin Registration"}

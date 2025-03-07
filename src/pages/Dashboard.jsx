@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate, Route, Routes } from "react-router-dom";
-import ProductCard from "../component/Product/productCard"; 
-import ProductDetails from "../component/Product/ProductTable"; 
+import ProductCard from "../component/Product/productCard";
+import ProductDetails from "../component/Product/ProductTable";
 import CategoriesPage from "../pages/CategoriesPage";
 import ProductupdateForm from "../component/Product/EditProduct";
+import BannerForm from "../component/Banner/BannerForm";
+import BannerTable from "../component/Banner/BannerTable";
 
 
 const Dashboard = () => {
@@ -31,7 +33,9 @@ const Dashboard = () => {
           <Route path="/categories-page" element={<CategoriesPage />} />
           {/* <Route path="/product-update" element={<ProductupdateForm />} /> */}
           <Route path="/product-update/:id" element={<ProductupdateForm />} />
-
+          <Route path="/add-banner" element={<BannerForm />} />
+          <Route path="/edit-banner/:id" element={<BannerForm />} />
+          <Route path="/banner-dashboard" element={<BannerTable />} /> 
         </Routes>
       </div>
     </div>

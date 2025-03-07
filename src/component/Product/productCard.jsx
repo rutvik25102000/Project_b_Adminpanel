@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { getCategories } from "../../APIs/categoryApi";
 
-
 const ProductCard = () => {
     const [formData, setFormData] = useState({
         name: "",
@@ -26,16 +25,16 @@ const ProductCard = () => {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-              const response = await getCategories();
-              if (response?.data?.categories) {
-                setCategories(response.data.categories); // ✅ Correctly set categories
-              } else {
-                setCategories([]); // Fallback to empty array
-              }
+                const response = await getCategories();
+                if (response?.data?.categories) {
+                    setCategories(response.data.categories); // ✅ Correctly set categories
+                } else {
+                    setCategories([]); // Fallback to empty array
+                }
             } catch (error) {
-              console.error("Error fetching categories:", error);
+                console.error("Error fetching categories:", error);
             }
-          };
+        };
 
         fetchCategories();
     }, []);
@@ -169,22 +168,22 @@ const ProductCard = () => {
                     ))}
                 </select>
 
-               
-                 {/* Food Type */}
-      <select
-        name="foodType"
-        value={formData.foodType}
-        onChange={handleChange}
-        className="p-2 border rounded col-span-1"
-        required
-      >
-        <option value="">Select Food Type</option>
-        {foodTypes.map((type) => (
-          <option key={type} value={type}>
-            {type}
-          </option>
-        ))}
-      </select>
+
+                {/* Food Type */}
+                <select
+                    name="foodType"
+                    value={formData.foodType}
+                    onChange={handleChange}
+                    className="p-2 border rounded col-span-1"
+                    required
+                >
+                    <option value="">Select Food Type</option>
+                    {foodTypes.map((type) => (
+                        <option key={type} value={type}>
+                            {type}
+                        </option>
+                    ))}
+                </select>
 
 
                 {/* Preparation Time */}

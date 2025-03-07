@@ -8,7 +8,7 @@ function AdminLayout() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   
     return (
-      <div className="h-screen flex flex-col bg-gray-100">
+      <div className="h-screen flex flex-col">
         {/* Sticky Navbar */}
         <div className="fixed top-0 w-full z-50 bg-white ">
           <Navbar toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />

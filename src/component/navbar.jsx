@@ -1,4 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
+import { TbLogout } from "react-icons/tb";
 
 const Navbar = ({ toggleSidebar }) => {
   const navigate = useNavigate();
@@ -16,7 +17,8 @@ const Navbar = ({ toggleSidebar }) => {
       </Link>
       <button className="sm:hidden" onClick={toggleSidebar}>☰</button>
       <div>
-      <button onClick={handleLogout} className="bg-blue-600 px-3 py-1 rounded">Logout</button>
+      <button onClick={handleLogout} className=" px-3 py-1 rounded"><TbLogout className="h-6 w-6 "/>
+      </button>
       </div>
     </nav>
   );
