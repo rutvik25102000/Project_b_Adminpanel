@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { getAllFoodItems, deleteProduct } from "../../APIs/AllApis"; // Import API function
 import { RiFileEditLine } from "react-icons/ri";
 import { FaDeleteLeft } from "react-icons/fa6";
-import { AiFillFileAdd } from "react-icons/ai";
+import { IoIosAddCircle } from "react-icons/io";
 
 
 const ProductTable = () => {
@@ -52,41 +52,42 @@ const ProductTable = () => {
         }
     };
 
-    return (<>
-      <div className="p-6 shadow-lg">
+    return (
+    <div className="h-100vh"> 
+        <div className="p-6 ">
+            <div className="p-6 flex justify-between ">
+            <h1 className="text-2xl font-bold mb-4">Product Management</h1>
             <button
                 onClick={() => navigate("/admin/add-product")} // Navigate to Add Product page
-                className="px-3 py-1 m-1 bg-blue-300 rounded"
-            > Add Product
+                className="flex items-center text-white gap-2 px-3 py-1 m-1 bg-blue-500 rounded"
+            ><IoIosAddCircle className="text-lg"/>Add Product 
                 {/* <AiFillFileAdd className="text-blue-500 h-8 w-8" /> */}
             </button>
         </div>
-        <div className="p-6 shadow-lg">
-            <h1 className="text-2xl font-bold mb-4">Product Management</h1>
             <div className="overflow-x-auto">
                 
-                <table className="min-w-full bg-white shadow-md  overflow-hidden  border rounded-sm border-black">
+                <table className="w-full  overflow-hidden  border ">
                     <thead className="bg-cyan-500 text-white  ">
                         <tr >
-                            <th className="py-2 px-4 text-left ">No.</th>
-                            <th className="py-2 px-4 text-left ">Name</th>
-                            <th className="py-2 px-4 text-left ">Description</th>
-                            <th className="py-2 px-4 text-left ">Price</th>
-                            <th className="py-2 px-4 text-left ">Image</th>
-                            <th className="py-2 px-4 text-left ">Available</th>
-                            <th className="py-2 px-4 text-left ">Edit    </th>
-                            <th className="py-2 px-4 text-left ">Delete</th>
+                            <th className="py-2 px-4 border border-gray-300 text-left ">No.</th>
+                            <th className="py-2 px-4 border border-gray-300 text-left ">Name</th>
+                            <th className="py-2 px-4 border border-gray-300 text-left ">Description</th>
+                            <th className="py-2 px-4 border border-gray-300 text-left ">Price</th>
+                            <th className="py-2 px-4 border border-gray-300 text-left ">Image</th>
+                            <th className="py-2 px-4 border border-gray-300 text-left ">Available</th>
+                            <th className="py-2 px-4 border border-gray-300 text-left ">Edit    </th>
+                            <th className="py-2 px-4 border border-gray-300 text-left ">Delete</th>
                         </tr>
                     </thead>
                     <tbody>
                         {/* {Array.isArray(products) && products.map((product, index) => ( */}
                         {products.map((product, index) => (
-                            <tr key={product._id} className="border-b">
-                                <td className="py-2 px-4 ">{index + 1}</td>
-                                <td className="py-2 px-4 ">{product.name}</td>
-                                <td className="py-2 px-4  truncate max-w-xs">{product.description}</td>
-                                <td className="py-2 px-4 ">₹{product.price}</td>
-                                <td className="py-2 px-4 ">
+                            <tr key={product._id} className="border border-gray-300">
+                                <td className="py-2 px-4 border border-gray-300 ">{index + 1}</td>
+                                <td className="py-2 px-4 border border-gray-300 ">{product.name}</td>
+                                <td className="py-2 px-4 border border-gray-300  truncate max-w-xs">{product.description}</td>
+                                <td className="py-2 px-4 border border-gray-300 ">₹{product.price}</td>
+                                <td className="py-2 px-4 border border-gray-300 ">
                                     <img
                                         src={product.imageUrl ? `http://localhost:5000${product.imageUrl}` : "image.jpg"}
                                         onError={(e) => (e.target.src = "/default-image.jpg")}
@@ -95,7 +96,7 @@ const ProductTable = () => {
                                     />
 
                                 </td>
-                                <td className="py-2 px-4 border-b">
+                                <td className="py-2 px-4 border border-gray-300 border-b border-gray-300">
                                     <span
                                         className={`px-2 py-1 text-xs rounded ${product.availability ? "bg-green-500 text-white" : "bg-red-500 text-white"
                                             }`}
@@ -103,7 +104,7 @@ const ProductTable = () => {
                                         {product.availability ? "true" : "false"}
                                     </span>
                                 </td>
-                                <td className="py-2 px-4 border-b">
+                                <td className="py-2 px-4 border border-gray-300 border-b border-gray-300">
                                     <button
                                         className="  px-3 py-1 m-1   rounded "
                                         onClick={() => handleEdit(product._id)}
@@ -112,7 +113,7 @@ const ProductTable = () => {
                                     </button>
                                   
                                 </td>
-                                <td className="py-2 px-4 border-b">
+                                <td className="py-2 px-4 border border-gray-300 border-b border-gray-300">
                                    
                                     <button
                                         onClick={() => handleDelete(product._id)}
@@ -129,7 +130,7 @@ const ProductTable = () => {
                 </table>
             </div>
         </div>
-    </>
+    </div>
     );
 };
 

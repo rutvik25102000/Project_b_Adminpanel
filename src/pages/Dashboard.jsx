@@ -6,6 +6,7 @@ import CategoriesPage from "../pages/CategoriesPage";
 import ProductupdateForm from "../component/Product/EditProduct";
 import BannerForm from "../component/Banner/BannerForm";
 import BannerTable from "../component/Banner/BannerTable";
+import LogoUpload from "../component/logo/LogoUpload";
 
 
 const Dashboard = () => {
@@ -24,7 +25,7 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="h-full flex flex-col">
+    <div className="h-full flex flex-col ">
       <div className="flex-1 p-4">
         <Routes>
           <Route path="add-product" element={<ProductCard />} />
@@ -36,6 +37,8 @@ const Dashboard = () => {
           <Route path="/add-banner" element={<BannerForm />} />
           <Route path="/edit-banner/:id" element={<BannerForm />} />
           <Route path="/banner-dashboard" element={<BannerTable />} /> 
+          <Route path="/logo-dashboard" element={<LogoUpload />} /> 
+
         </Routes>
       </div>
     </div>

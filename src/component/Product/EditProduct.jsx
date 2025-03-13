@@ -22,6 +22,7 @@ const UpdateformData = () => {
   const [categories, setCategories] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(""); // Image preview URL
+  const [selectedFile, setSelectedFile] = useState(null);
 
   useEffect(() => {
     getProductById(id)
@@ -53,6 +54,8 @@ const UpdateformData = () => {
     if (file) {
       setSelectedImage(file);
       setImagePreview(URL.createObjectURL(file)); // Preview image before upload
+      setSelectedFile(file);
+
     }
   };
 
@@ -124,9 +127,10 @@ const UpdateformData = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-8">
+    <div className="border border-gray-200 p-8 rounded-lg shadow-md">
       <h2 className="text-3xl font-semibold text-center text-gray-800 mb-6">Update Food Item</h2>
-      <form onSubmit={handleSubmit} className="space-y-5">
+
+      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Food Name */}
         <div>
           <label className="block text-gray-700 font-medium mb-1">Food Name</label>
@@ -137,21 +141,8 @@ const UpdateformData = () => {
             onChange={handleChange}
             placeholder="Enter food name"
             required
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500"
           />
-        </div>
-
-        {/* Description */}
-        <div>
-          <label className="block text-gray-700 font-medium mb-1">Description</label>
-          <textarea
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            placeholder="Enter food description"
-            required
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          ></textarea>
         </div>
 
         {/* Price */}
@@ -164,7 +155,7 @@ const UpdateformData = () => {
             onChange={handleChange}
             placeholder="Enter price"
             required
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500"
           />
         </div>
 
@@ -176,7 +167,7 @@ const UpdateformData = () => {
             value={formData.category}
             onChange={handleChange}
             required
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500"
           >
             <option value="">Select Category</option>
             {categories.length > 0 ? (
@@ -191,24 +182,23 @@ const UpdateformData = () => {
           </select>
         </div>
 
-        {/* Image Upload & Preview */}
-        <div className="flex flex-col items-center space-y-3">
-          <img
-            src={imagePreview || "/default-image.jpg"}
-            alt="Food Preview"
-            className="w-32 h-32 object-cover rounded-lg border"
-          />
-          <input
-            type="file"
-            name="imageUrl"
-            accept="image/*"
-            onChange={handleFileChange}
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+        {/* Food Type */}
+        <div>
+          <label className="block text-gray-700 font-medium mb-1">Food Type</label>
+          <select
+            name="foodType"
+            value={formData.foodType}
+            onChange={handleChange}
+            required
+            className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="Veg">Veg</option>
+            <option value="Non-Veg">Non-Veg</option>
+          </select>
         </div>
 
         {/* Ingredients */}
-        <div>
+        <div className="col-span-2">
           <label className="block text-gray-700 font-medium mb-1">Ingredients</label>
           <input
             type="text"
@@ -216,7 +206,34 @@ const UpdateformData = () => {
             value={formData.ingredients}
             onChange={handleChange}
             placeholder="Ingredients (comma separated)"
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        {/* Description */}
+        <div className="col-span-3">
+          <label className="block text-gray-700 font-medium mb-1">Description</label>
+          <textarea
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+            placeholder="Enter food description"
+            required
+            className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500"
+          ></textarea>
+        </div>
+
+        {/* Preparation Time */}
+        <div>
+          <label className="block text-gray-700 font-medium mb-1">Preparation Time (mins)</label>
+          <input
+            type="number"
+            name="preparationTime"
+            value={formData.preparationTime}
+            onChange={handleChange}
+            placeholder="Enter preparation time"
+            required
+            className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500"
           />
         </div>
 
@@ -232,44 +249,47 @@ const UpdateformData = () => {
           <label className="text-gray-700 font-medium">Available</label>
         </div>
 
-        {/* Preparation Time */}
-        <div>
-          <label className="block text-gray-700 font-medium mb-1">Preparation Time (mins)</label>
-          <input
-            type="number"
-            name="preparationTime"
-            value={formData.preparationTime}
-            onChange={handleChange}
-            placeholder="Enter preparation time"
-            required
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        {/* Image Upload & Preview */}
+        <div className="col-span-3 flex flex-col md:flex-row items-center gap-4">
+         
+          <div className="col-span-3">
+            <label className="block text-gray-700 font-medium mb-1">Upload Image</label>
+            <div className="relative w-full">
+              <input
+                type="file"
+                name="imageUrl"
+                accept="image/*"
+                onChange={handleFileChange}
+                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+              />
+              <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden">
+                <span className="bg-gray-800 text-white px-4 py-2 text-sm font-semibold">Choose File</span>
+                <span className="flex-1 px-4 py-2 text-gray-600 bg-gray-100">
+                  {selectedFile ? selectedFile.name : "No file chosen"}
+                </span>
+              </div>
+            </div>
+          </div>
+          <img
+            src={imagePreview || "/default-image.jpg"}
+            alt="Food Preview"
+            className="w-32 h-32 object-cover rounded-lg border"
           />
         </div>
 
-        {/* Food Type */}
-        <div>
-          <label className="block text-gray-700 font-medium mb-1">Food Type</label>
-          <select
-            name="foodType"
-            value={formData.foodType}
-            onChange={handleChange}
-            required
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <option value="Veg">Veg</option>
-            <option value="Non-Veg">Non-Veg</option>
-          </select>
-        </div>
-
         {/* Submit Button */}
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
-        >
-          Update Food Item
-        </button>
+        <div className="col-span-3">
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
+          >
+            Update Food Item
+          </button>
+        </div>
       </form>
     </div>
+
+
   );
 };
 

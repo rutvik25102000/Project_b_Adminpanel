@@ -62,13 +62,15 @@ export const updateBanner = async (id, formData) => {
 };
 
 // Update banner status
-export const updateBannerStatus = async (id, status) => {
+export const toggleBannerStatus = async (id, status) => {
   try {
-    await axios.put(`${API_URL}/status/${id}`, { status }, getAuthHeaders());
+    return (await axios.put(`${API_URL}/update-status-banner/${id}`, { status }, getAuthHeaders())).data;
   } catch (error) {
-    console.error("Error updating banner status:", error);
+    console.error("Error updating logo status:", error);
+    throw error;
   }
 };
+
 
 // Delete a banner
 export const deleteBanner = async (id) => {

@@ -35,7 +35,7 @@ const CategoriesPage = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto mt-10">
+    <div className="">
       <h1 className="text-xl font-bold mb-4">Manage Categories</h1>
       <CategoryForm onSubmit={handleAddOrUpdateCategory} initialData={editingCategory} />
       <CategoryList categories={categories} setCategories={setCategories} onEdit={setEditingCategory} />

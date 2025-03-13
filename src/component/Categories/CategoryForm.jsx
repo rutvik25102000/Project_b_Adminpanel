@@ -24,7 +24,7 @@ const CategoryForm = ({ onSubmit, initialData = {} }) => {
         onChange={(e) => setName(e.target.value)}
         className="border p-2 rounded w-full"
       />
-      <button type="submit" className="bg-cyan-500 text-white px-4 py-2 rounded">
+      <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
         {initialData?.name ? "Update" : "Add"}
       </button>
     </form>

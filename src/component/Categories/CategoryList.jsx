@@ -1,7 +1,7 @@
-import {  useEffect } from "react";
-import { getCategories,deleteCategory } from "../../APIs/categoryApi";
+import { useEffect } from "react";
+import { getCategories, deleteCategory } from "../../APIs/categoryApi";
 
-const CategoryList = ({ categories, setCategories, onEdit  }) => {
+const CategoryList = ({ categories, setCategories, onEdit }) => {
 
   // ✅ Fetch Categories from Backend
   const fetchCategories = async () => {
@@ -10,7 +10,7 @@ const CategoryList = ({ categories, setCategories, onEdit  }) => {
       if (response?.data?.categories) {
         setCategories(response.data.categories);
       } else {
-        setCategories([]); 
+        setCategories([]);
       }
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -33,37 +33,50 @@ const CategoryList = ({ categories, setCategories, onEdit  }) => {
     }
   };
 
-  return (
-    <div className="bg-white shadow-md rounded-lg p-4 mt-4">
-      <h2 className="text-lg font-bold mb-2">Category List</h2>
-      
-    
+  return (<>
+    <div className="bg-white  shadow-md rounded-lg p-4 mt-4">
+      <h2 className="text-lg font-bold mb-4">Category List</h2>
+
       {categories.length === 0 ? (
-        <p>No categories found.</p>
+        <p className="text-gray-600">No categories found.</p>
       ) : (
-        <ul>
-          {categories.map((category) => (
-            <li key={category._id} className="flex justify-between items-center border-b p-2">
-              <span>{category.name}</span>
-              <div>
-                <button
-                  onClick={() => onEdit(category)}
-                  className="bg-yellow-500 text-white px-2 py-1 rounded mr-2"
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={() => handleDelete(category._id)}
-                  className="bg-red-500 text-white px-2 py-1 rounded"
-                >
-                  Delete
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse border border-gray-300">
+            <thead>
+              <tr className="bg-gray-100">
+                <th className="border border-gray-300 px-4 py-2 text-left">NO.</th>
+                <th className="border border-gray-300 px-4 py-2 text-left">Category Name</th>
+                <th className="border border-gray-300 px-4 py-2 text-center">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {categories.map((category,index) => (
+                <tr key={category._id} className="border-b border-gray-300">
+                  <td className="py-2 px-4 ">{index + 1}</td>
+
+                  <td className="border border-gray-300 px-4 py-2">{category.name}</td>
+                  <td className="border border-gray-300 px-4 py-2 text-center">
+                    <button
+                      onClick={() => onEdit(category)}
+                      className="border-2 border-yellow-500 text-black px-3 py-1 rounded mr-2 hover:bg-yellow-600 transition"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDelete(category._id)}
+                      className="border-2 border-orange-800 text-black px-3 py-1 rounded hover:bg-red-600 transition"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
+    </>
   );
 };
 
