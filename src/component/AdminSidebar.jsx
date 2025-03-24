@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { MdDashboard, MdCategory } from "react-icons/md";
-import { GrTasks } from "react-icons/gr";
-import { FaCanadianMapleLeaf } from "react-icons/fa";
-import { LiaImagesSolid } from "react-icons/lia";
+import {  MdCategory } from "react-icons/md";
+import { FaUsers,FaTachometerAlt ,FaBoxOpen,FaRegImage  } from "react-icons/fa";
+import { MdOutlineWallpaper } from "react-icons/md";
+import { TbListDetails } from "react-icons/tb";
 
 const Sidebar = ({ isOpen }) => {
   return (
@@ -15,14 +15,14 @@ const Sidebar = ({ isOpen }) => {
         <Link
           to="/admin/dashboard"
           className="flex items-center gap-2 py-2 px-4 m-2 hover:bg-gray-500 hover:text-white"
-        ><MdDashboard className="text-lg"/>
+        ><FaTachometerAlt  className="text-lg"/>
           Dashboard
         </Link>
 
         <Link
           to="/admin/product-details"
           className="flex items-center gap-2 py-2 px-4 m-2 hover:bg-gray-500 hover:text-white"
-        ><GrTasks className="text-lg"/>
+        ><FaBoxOpen className="text-lg"/>
 
           product-Table
         </Link>
@@ -37,15 +37,29 @@ const Sidebar = ({ isOpen }) => {
           to="/admin/banner-dashboard"
           className="flex items-center gap-2 py-2 px-4 m-2 hover:bg-gray-500 hover:text-white"
         >
-          <FaCanadianMapleLeaf className="text-lg" />
+          <MdOutlineWallpaper className="text-lg" />
           <span>Banners</span>
         </Link>
         <Link
           to="/admin/logo-dashboard"
           className="flex items-center gap-2 py-2 px-4 m-2 hover:bg-gray-500 hover:text-white"
         >
-          <LiaImagesSolid className="text-lg" />
+          <FaRegImage  className="text-lg" />
           <span>Logo</span>
+        </Link>
+        <Link
+          to="/admin/users-dashboard"
+          className="flex items-center gap-2 py-2 px-4 m-2 hover:bg-gray-500 hover:text-white"
+        >
+          <FaUsers className="text-lg" />
+          <span>UserDetails</span>
+        </Link>
+        <Link
+          to="/admin/users-dashboard"
+          className="flex items-center gap-2 py-2 px-4 m-2 hover:bg-gray-500 hover:text-white"
+        >
+          <TbListDetails className="text-lg" />
+          <span>Orders Details</span>
         </Link>
       </nav>
     </aside>

@@ -41,7 +41,7 @@ const AdminLogin = () => {
           className="w-full p-3 border border-gray-300 rounded-md"
           placeholder="admin@example.com"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value.toLowerCase())} 
           required
         />
       </div>

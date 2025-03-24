@@ -127,10 +127,9 @@ const UpdateformData = () => {
   };
 
   return (
-    <div className="border border-gray-200 p-8 rounded-lg shadow-md">
-      <h2 className="text-3xl font-semibold text-center text-gray-800 mb-6">Update Food Item</h2>
-
-      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div className="border border-gray-200 p-6 rounded-lg ">
+      <h2 className="text-3xl font-semibold text-center text-gray-800 mb-4">Update Food Item</h2>
+      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {/* Food Name */}
         <div>
           <label className="block text-gray-700 font-medium mb-1">Food Name</label>
@@ -198,7 +197,7 @@ const UpdateformData = () => {
         </div>
 
         {/* Ingredients */}
-        <div className="col-span-2">
+        <div >
           <label className="block text-gray-700 font-medium mb-1">Ingredients</label>
           <input
             type="text"
@@ -206,6 +205,19 @@ const UpdateformData = () => {
             value={formData.ingredients}
             onChange={handleChange}
             placeholder="Ingredients (comma separated)"
+            className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+          {/* Preparation Time */}
+        <div>
+          <label className="block text-gray-700 font-medium mb-1">Preparation Time (mins)</label>
+          <input
+            type="number"
+            name="preparationTime"
+            value={formData.preparationTime}
+            onChange={handleChange}
+            placeholder="Enter preparation time"
+            required
             className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500"
           />
         </div>
@@ -223,34 +235,11 @@ const UpdateformData = () => {
           ></textarea>
         </div>
 
-        {/* Preparation Time */}
-        <div>
-          <label className="block text-gray-700 font-medium mb-1">Preparation Time (mins)</label>
-          <input
-            type="number"
-            name="preparationTime"
-            value={formData.preparationTime}
-            onChange={handleChange}
-            placeholder="Enter preparation time"
-            required
-            className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
 
-        {/* Availability Checkbox */}
-        <div className="flex items-center space-x-2">
-          <input
-            type="checkbox"
-            name="availability"
-            checked={formData.availability}
-            onChange={handleChange}
-            className="w-5 h-5 text-blue-500"
-          />
-          <label className="text-gray-700 font-medium">Available</label>
-        </div>
+      
 
         {/* Image Upload & Preview */}
-        <div className="col-span-3 flex flex-col md:flex-row items-center gap-4">
+        <div className="col-span-2  flex flex-col md:flex-row items-center gap-4">
          
           <div className="col-span-3">
             <label className="block text-gray-700 font-medium mb-1">Upload Image</label>
@@ -263,7 +252,7 @@ const UpdateformData = () => {
                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
               />
               <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden">
-                <span className="bg-gray-800 text-white px-4 py-2 text-sm font-semibold">Choose File</span>
+                <span className="bg-gray-800 text-white px-4 py-3 text-sm font-semibold">Choose File</span>
                 <span className="flex-1 px-4 py-2 text-gray-600 bg-gray-100">
                   {selectedFile ? selectedFile.name : "No file chosen"}
                 </span>
@@ -275,6 +264,17 @@ const UpdateformData = () => {
             alt="Food Preview"
             className="w-32 h-32 object-cover rounded-lg border"
           />
+        </div>
+          {/* Availability Checkbox */}
+          <div className="flex items-center space-x-2">
+          <input
+            type="checkbox"
+            name="availability"
+            checked={formData.availability}
+            onChange={handleChange}
+            className="w-5 h-5 text-blue-500"
+          />
+          <label className="text-gray-700 font-medium">Available</label>
         </div>
 
         {/* Submit Button */}

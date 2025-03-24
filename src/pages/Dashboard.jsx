@@ -7,7 +7,7 @@ import ProductupdateForm from "../component/Product/EditProduct";
 import BannerForm from "../component/Banner/BannerForm";
 import BannerTable from "../component/Banner/BannerTable";
 import LogoUpload from "../component/logo/LogoUpload";
-
+import UserDashboard from "../component/userDetails/userDetailstable";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -38,6 +38,7 @@ const Dashboard = () => {
           <Route path="/edit-banner/:id" element={<BannerForm />} />
           <Route path="/banner-dashboard" element={<BannerTable />} /> 
           <Route path="/logo-dashboard" element={<LogoUpload />} /> 
+          <Route path="/users-dashboard" element={<UserDashboard />} /> 
 
         </Routes>
       </div>
